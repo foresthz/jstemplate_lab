@@ -1,0 +1,22 @@
+{
+  "name": "mustache_lab",
+  "authors": [
+    "38 <xx@38.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "mustache": "2.3.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "res/static",
+    "test",
+    "tests"
+  ]
+}
