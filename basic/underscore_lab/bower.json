@@ -1,0 +1,22 @@
+{
+  "name": "underscore_lab",
+  "authors": [
+    "38 <xx@38.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "underscore": "1.8.3"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "res/static",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,62 @@
+
+<script type="text/javascript" src='../res/static/mustache/mustache.js'></script>
+
+<div id="base_user_node"></div>
+
+
+<script type="text/template" id='base_template'>
+
+{{#items}}
+正文: {{> content}}
+=====================脚注================
+{{/items}}
+
+
+</script>
+
+<script type="text/template" id="user_template">
+<br>
+<font class="redfont">内容</font> :
+<font class="text">{{text}}</font> --||-- <br> 
+</script>
+
+
+
+<script type="text/javascript">
+
+function base_user_lab() {
+	var base_user_node = document.getElementById('base_user_node');
+
+	var base_template = document.querySelector('#base_template');
+	var user_template = document.querySelector('#user_template');
+	var data2 = {
+		items: [{
+			text: '一场闲富贵，狠狠争来，虽得还是失；百岁好光阴，忙忙过了，纵寿亦为夭。'
+		}, {
+			text: '世事如棋局，不着得才是高手；人生似瓦盆，打破了方见真空。'
+		}]
+	}
+	var partial = {
+		content: user_template.text
+	}
+	let render_text = Mustache.render(base_template.text, data2, partial);
+	base_user_node.innerHTML = render_text;
+}
+
+
+
+base_user_lab();
+
+
+</script>
+
+<style type="text/css">
+.redfont {
+	color:red;
+	background-color: yellow;
+}
+
+.text {
+	color:green;
+}
+</style>

@@ -1,0 +1,41 @@
+
+
+<script type="text/javascript" src='../res/static/mustache/mustache.js'></script>
+
+<script type="text/template" id='template1'>
+{{#items}}
+	<li>
+		<ul>{{content}}</ul>
+	</li>
+{{/items}}
+</script>
+
+<div id="lab1"></div>
+
+<script type="text/javascript">
+
+var template = function(id) {
+	return document.getElementById(id).text;
+}
+
+var E = function(id) {
+	return document.getElementById(id);
+}
+
+function lab1() {
+	let template1 = template('template1');
+	let data1 = {
+		items: [
+			{content: '人之有生也，如太仓之粒米，如灼目之电光，如悬崖之朽木，如逝海之一波。'},
+			{content: '两个空拳握古今，握住了还当放手；一条竹杖挑风月，挑到时也要息肩。'},
+			{content: '阶下几点飞翠落红，收拾来无非诗料；窗前一片浮青映白，悟入处尽是禅机。'}
+		]
+	}
+	let html1 = Mustache.render(template1, data1);
+	return html1;
+}
+
+E('lab1').innerHTML = lab1();
+
+
+</script>

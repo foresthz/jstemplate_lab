@@ -1,0 +1,73 @@
+
+<script type="text/javascript" src='../res/static/mustache/mustache.js'></script>
+
+<div id="lab1"></div>
+
+<div id="jstemplate1">
+{{#items}}
+	<br>
+	标题: <b>{{title}}</b>
+	内容: <font class="content">{{content}}</font>
+	<br>
+{{/items}}
+</div>
+
+<script type="text/javascript">
+
+function template(id) {
+	let node = document.getElementById(id);
+	return node.innerHTML;
+}
+
+var E = function(id) {
+	let node = document.getElementById(id);
+	return node;
+}
+
+function lab1() {
+	var lab1 = E('lab1');
+	var data1 = {
+		'items': [{
+			title: '闲适篇1',
+			content: '花开花谢春不管，拂意事休对人言；水暖水寒鱼自知，会心处还期独赏。'
+		}, {
+			title: '',
+			content: '静觇竞巢鹊，叹杰士空逞英雄'
+		}, {
+			title: '衰兰送客',
+			content: '谈纷华而厌者，或见纷华而喜；语淡泊而欣者，或处淡泊而厌'
+		}, {
+			title: '天若有情',
+			content: '"鸟惊心"、"花溅泪"，怀此热肝肠，如何领取得冷风月；"山写照"、"水传神"，识吾真面目，方可摆脱得幻乾坤。'
+		}, {
+			title: '富贵',
+			content: '富贵得一世宠荣，到死时反增了一个恋字，如负重担'
+		}, {
+			title: '贫贱',
+			content: '贫贱得一世清苦，到死时反脱了一个厌字，如释重枷'
+		}]
+	}
+	var template1 = template('jstemplate1');
+
+	var html1 = Mustache.render(template1, data1);
+	E('lab1').innerHTML = html1;
+	return html1;
+}
+
+lab1();
+
+
+
+</script>
+
+<style type="text/css">
+[id^=jstemplate] {
+	color: red;
+	display:none;
+}
+
+.content {
+	color: green;
+	border: 1px dashed pink;
+}
+</style>
