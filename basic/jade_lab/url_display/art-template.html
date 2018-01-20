@@ -1,0 +1,29 @@
+
+<script type="text/javascript" src="node_modules/art-template/lib/template-web.js"></script>
+
+<script id="test1" type="text/html">
+	<h2><%= user.name %></h2>
+</script>
+
+<style type="text/css">
+
+.display {
+	width: 400px;
+	height: 300px;
+	margin: auto;
+	background-color: yellow;
+}
+</style>
+
+
+
+<script type="text/javascript">
+
+function render1() {
+	var html = template('test1', {user:{name:'abc'}} );
+	document.getElementById("display").innerHTML = html;
+}
+	
+</script>
+
+<div class="display" id="display"></div>

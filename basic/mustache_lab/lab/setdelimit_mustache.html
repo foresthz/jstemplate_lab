@@ -10,6 +10,16 @@
 {{/items}}
 </script>
 
+<script type="text/template" id="template2">
+{{=<% %>=}}
+
+{{#items}}
+	<li>
+		<% content %>
+	</li>
+{{/items}}
+</script>
+
 <div id="lab1"></div>
 
 <script type="text/javascript">
@@ -33,6 +43,15 @@ function lab1() {
 	}
 	let html1 = Mustache.render(template1, data1);
 	return html1;
+}
+
+function lab2() {
+	let template2 = template1('template2');
+	let data2 = {
+		items:[
+			{content: '夜深人静独坐观心；始知妄穷而真独露，每于此中得大机趣；既觉真现而妄难逃，又于此中得大惭忸。'}
+		]
+	}
 }
 
 E('lab1').innerHTML = lab1();

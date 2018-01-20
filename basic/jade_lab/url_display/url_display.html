@@ -1,0 +1,59 @@
+
+
+<script type="text/javascript" src="node_modules/art-template/lib/template-web.js"></script>
+<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/canjs/2.2.6/can.jquery.min.js"></script>
+
+<script id="content" type="text/html">
+    {{if isAdmin}}
+    <h1>{{title}}</h1>
+    <span>{{dateTime | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+    <ul>
+        {{each list as value i}}
+        <li>索引 {{i}} ：{{value}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    {{text callback=(textCallback) /}}
+    {{text value=(title) callback=(textCallback) /}}
+</script>
+
+<script>
+    //添加text组件
+    artTemplate.createAssembly('text', {
+        //设置默认值
+        default :{
+            value : "默认内容",
+            callback : function (value){
+
+            }
+        },
+        //设置初始化
+        init : function () {
+            var data = this.data;
+            var element = this.element;
+            var span = element.find('span');
+            $(element).find('input').keyup(function () {
+                var value = $(this).val();
+                span.html(value);
+                if(data['callback']) data.callback(value);
+            });
+        },
+        //渲染内容
+        render : function () {
+            return '<div>\n    <input type="text" value="{{value}}" />\n    <span>{{value}}</span>\n</div>\n';
+        }
+    });
+
+    $(function () {
+        var data = {
+            isAdmin: true,
+            title: '基本例子',
+            dateTime : '2017/3/3 22:32:23',
+            list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他'],
+            textCallback : function (value) {
+                console.log(value);
+            }
+        };
+        $('#content').artTemplate(data);
+    });
+</script> -->

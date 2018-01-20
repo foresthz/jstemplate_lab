@@ -1,0 +1,147 @@
+
+<script type="text/javascript" src="node_modules/art-template/lib/template-web.js"></script>
+
+<script id="test1" type="text/html">
+	<h2><%= user.name %></h2>
+</script>
+
+<script id="url_template" type="text/html">
+	<% for(var i =0; i< data.length; i++) { %>
+		<div class="url_item">
+			<%= i %> <a href="<%= data[i][0]%>" target="_blank"><%= data[i][1]%></a>
+		</div>
+	<% } %>
+</script>
+
+<script type="text/html" id="template_all">
+	<% for(var i=0; i < data.length; i++) { %>
+		<div class="url_block">
+			<% for (var j=0; j<data[i].length; j++){ %>
+				<div class="url_item">
+					<a href="<%= data[i][j][0]%>" target="_blank"><%= data[i][j][1]%></a>
+				</div>
+			<% } %>
+		</div>
+	<% } %>
+
+	<b>数组长度+1=</b>{{data.length + 1}}
+</script>
+
+<script id="render_template" type="text/html">
+使用了空格: {{ data.username }} <br>
+用户名：{{data.username}} <br>
+年龄: {{data.age}} <br>
+编译获得渲染函数：<br> {{data.render}} 
+</script>
+
+<!-- 
+<%= data.username %>
+用户名：{{data.username}}
+ -->
+
+
+
+<style type="text/css">
+
+.display {
+	width: 400px;
+	height: 300px;
+	margin: auto;
+	background-color: #94C342;
+	opacity: 0.5;
+}
+
+.url_block {
+	margin: 0 0 10 0;
+	border-bottom: red 1px solid;
+	display: block;
+}
+
+.url_block:hover {
+	background-color: yellow;
+}
+
+.url_item a {
+	color: red;
+}
+
+.url_item a:hover {
+	color: #10799C;
+}
+</style>
+
+
+
+<script type="text/javascript">
+
+function render1() {
+	var html = template('test1', {user:{name:'abc'}} );
+	document.getElementById("display").innerHTML = html;
+}
+
+function render_url() {
+	console.info('url render');
+	var data = [
+		['http://www.toutiao.com/', '头条'],
+		['https://www.v2ex.com/', 'v2ex'],
+		['http://quanxue.cn/CT_NanHuaiJin/ZongJingIndex.html', '禅宗-宗镜录']
+	]
+	var html = template('url_template', {'data':data});
+	document.getElementById("display").innerHTML = html;
+}
+
+function render_url_all() {
+	console.info('render all');
+	var url_data = [
+		[
+			['http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing17.html','多闻如烛助道明'],
+			['http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing20.html', '忍教哀乐作主翁'],
+			['http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing62.html', '黄土让花红'],
+			['http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing68.html', '道人挑大担']
+		],
+		[
+			['http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing24.html', '命如电影生已灭'],
+			['http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing28.html', '空心具足八万门']
+		]
+	];
+	var html = template('template_all', {'data':url_data});
+	document.getElementById("display").innerHTML = html;
+}
+
+function getRenderFunction() {
+	var t_string = document.getElementById('render_template').innerHTML;
+	var render = template.compile(t_string);
+	console.info('render: ', render);
+	var render_case1 = {
+		'username':'jack',
+		age: 11,
+		// 如果直接渲染,会调用函数,但是没有渲染对象,会报错
+		'render':render.toString()
+	};
+	var html = render( {'data':render_case1} );
+	document.getElementById('display').innerHTML = html;
+
+
+}
+	
+</script>
+
+<div class="display" id="display"></div>
+
+(.url_block>.url_item*3)*2
+
+<div class="url_block">
+	<div class="url_item"><a href="http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing65.html">红尘送色涤眼青</a></div>
+	<div class="url_item"><a href="http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing83.html">意密造山河</a></div>
+	<div class="url_item"><a href="http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing82.html">泥牛入海怎么了</a></div>
+</div>
+<div class="url_block">
+	<div class="url_item"><a href="http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing90.html">道眼由见瞎</a></div>
+	<div class="url_item"><a href="http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing59.html">光去千里留灯在</a></div>
+	<div class="url_item"><a href="http://quanxue.cn/CT_NanHuaiJin/ZongJing/ZongJing62.html">黄土让花红</a></div>
+</div>
+
+<button onclick="render1()">render1</button>
+<button onclick="render_url()">URL渲染</button>
+<button onclick="render_url_all()">url完全渲染</button>
+<button title="从模板编译返回render函数" onclick="getRenderFunction()">获得Render函数</button>
