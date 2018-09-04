@@ -1,0 +1,26 @@
+
+
+<script type="text/javascript" src="node_modules/art-template/lib/template-web.js"></script>
+
+<script type="text/html" id="main_part">
+
+姓名 : <%= data.name%>
+信息 : <% include( 'info_part', {data:data.info}) %> 
+</script>
+
+<script type="text/html" id="info_part">
+
+年龄: <%= data['age']%>
+地方: <%= data['place']%>
+</script>
+
+<script type="text/javascript">
+
+let dataX = {
+	name: 'xxname',
+	'info' : {
+		age: 11,
+		place: 'abc'
+	}
+}
+</script>

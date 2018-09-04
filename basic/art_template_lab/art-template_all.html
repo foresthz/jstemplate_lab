@@ -5,10 +5,18 @@
 	<h2><%= user.name %></h2>
 </script>
 
-<script id="url_template" type="text/html">
+<script id="url_template_lab1" type="text/html">
 	<% for(var i =0; i< data.length; i++) { %>
 		<div class="url_item">
-			<%= i %> <a href="<%= data[i][0]%>" target="_blank"><%= data[i][1]%></a>
+			<%= i %> <a href="<%= function(){return data[i][0]}%>" target="_blank"><%= data[i][1]%></a>
+		</div>
+	<% } %>
+</script>
+
+<script id="url_template_lab2" type="text/html">
+	<% for(var i =0; i< data.length; i++) { %>
+		<div class="url_item">
+			<%= i %> <a href="<%= data[i][0]%>" target="_blank"><%= EnhancedName(data[i][1])%></a>
 		</div>
 	<% } %>
 </script>
@@ -79,14 +87,32 @@ function render1() {
 	document.getElementById("display").innerHTML = html;
 }
 
-function render_url() {
-	console.info('url render');
+
+
+function render_url_lab1() {
+	console.info('url render lab1');
 	var data = [
 		['http://www.toutiao.com/', '头条'],
 		['https://www.v2ex.com/', 'v2ex'],
 		['http://quanxue.cn/CT_NanHuaiJin/ZongJingIndex.html', '禅宗-宗镜录']
 	]
-	var html = template('url_template', {'data':data});
+	var html = template('url_template_lab1', {'data':data});
+	document.getElementById("display").innerHTML = html;
+}
+
+template.defaults.imports.EnhancedName = function(name) {
+	return name + '__' + name.length;
+}
+
+function render_url_lab2() {
+	console.info('url render lab2');
+	let dataX = [
+		['会计', 'https://www.zhihu.com/topic/19568381/hot', 'color:green'],
+		['财务', 'https://www.zhihu.com/topic/19634480/hot', 'color:red']
+	];
+	var html = template('url_template_lab2', {
+		data: dataX
+	});
 	document.getElementById("display").innerHTML = html;
 }
 
@@ -123,6 +149,28 @@ function getRenderFunction() {
 
 
 }
+
+
+
+function renderTxtLab1() {
+	let txtTemplate1 = `
+		<% for(let i=0; i< data.length; i ++) { %>
+			<%if(data[i].length>=3) {%>
+				<a href="<%= data[i][1]%>" target="_blank"><b style="<%= data[i][2]%>"><%= data[i][0]%></b> </a>
+			<%} else {%>
+				<a href="<%= data[i][1]%>" target="_blank"><b><%= EnhancedName(data[i][0])%></b></a>
+			<%}%>
+			<br />
+		<% } %>
+		`;
+	let dataXX = [
+		['知乎', 'http://zhihu.com', 'color:pink'],
+		['头条', 'https://www.toutiao.com', 'color:red;background-color:yellow'],
+		['sohu', 'http://www.sohu.com']
+	];
+	var html = template.render(txtTemplate1, {data: dataXX});
+	document.getElementById('display').innerHTML = html;
+}
 	
 </script>
 
@@ -142,6 +190,8 @@ function getRenderFunction() {
 </div>
 
 <button onclick="render1()">render1</button>
-<button onclick="render_url()">URL渲染</button>
+<button onclick="render_url_lab1()">URL渲染1</button>
+<button onclick="render_url_lab2()">URL渲染2</button>
 <button onclick="render_url_all()">url完全渲染</button>
+<button onclick="renderTxtLab1()"><font color=red>字符渲染</font></button>
 <button title="从模板编译返回render函数" onclick="getRenderFunction()">获得Render函数</button>
